@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+    .body{
+        background-image: url(https://wallpaperset.com/w/full/4/c/e/492383.jpg);
+        font-family: Arial, Helvetica, sans-serif;
+        
+    }
+    h2{
+        color: white;
+        font-size: 300%;
+        text-align: center;
+    }
+    .info{
+        color: white;
+        /* background-color: black; */
+        text-align: center;
+        /* justify-content: center; */
+        padding: 0%;
+        font-size: 100%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        padding-right: 4%;
+        padding-left: 4%;
+    }
+    .button{
+        border-color: aqua;
+    }
+  </style>
+</head>
+<body class="body">
+    <h2>Validation Form</h2>
+    <form id="registrationForm" onsubmit="validateForm(event)">
+        <div class="info">
+        <div>
+          <label for="name">Name:</label>
+         <input type="text" id="name" name="name">
+         <span id="nameError" class="error"></span>
+        </div>
+        <br>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+          <span id="emailError" class="error"></span>
+        </div>
+        <br>
+        <div>
+            <label for="PhoneNo">Phone Number</label>
+            <input type="number" id="number" name="number">
+        </div>
+        <br>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <span id="passwordError" class="error"></span>
+        </div>
+        <br>
+        <div>
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword">
+          <span id="confirmPasswordError" class="error"></span>
+        </div>
+        <br>
+        <div>
+        <input class="button" type="submit" value="Submit">
+        </div>
+        </div>
+    </form>
+    <script>
+        function validateForm(event) {
+        event.preventDefault();
+        clearErrors();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        if (name.trim() === '') {
+        displayError('nameError', 'Name is required');
+        }
+        if (number.trim() === '') {
+        displayError('numberError', 'Number is required');
+        }
+        if (email.trim() === '') {
+        displayError('emailError', 'Email is required');
+        } else if (!validateEmail(email)) {
+        displayError('emailError', 'Invalid email format');
+      }
+      if (password.trim() === '') {
+        displayError('passwordError', 'Password is required');
+      } else if (password.length < 6) {
+        displayError('passwordError', 'Password must be at least 6 characters');
+      }
+      if (confirmPassword.trim() === '') {
+        displayError('confirmPasswordError', 'Confirm Password is required');
+      } else if (confirmPassword !== password) {
+        displayError('confirmPasswordError', 'Passwords do not match');
+      }
+      if (!hasErrors()) {
+        document.getElementById('registrationForm').submit();
+      }
+    }
+    function validateEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+    function displayError(elementId, errorMessage) {
+      const errorElement = document.getElementById(elementId);
+      errorElement.textContent = errorMessage;
+    }
+    function clearErrors() {
+      const errorElements = document.getElementsByClassName('error');
+      for (let i = 0; i < errorElements.length; i++) {
+        errorElements[i].textContent = '';
+      }
+    }
+    function hasErrors() {
+      const errorElements = document
+      .getElementsByClassName('error');
+      for (let i = 0; i < errorElements.length; i++) {
+        if (errorElements[i].textContent !== '') {
+          return true; 
+        }
+      }
+      return false; 
+    }
+  </script>
+</body>
+</html>
